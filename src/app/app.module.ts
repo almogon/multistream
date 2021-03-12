@@ -16,7 +16,7 @@ import { FrameTwitchComponent } from './frame-container/twitch/frame-twitch.comp
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FlexLayoutModule 
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

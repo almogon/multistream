@@ -1,12 +1,15 @@
 <div fxFlex fxLayout="column" fxLayoutAlign="space-around center"> 
-    <span>SELECCIONA CUANTAS PANTALLAS QUIERES VER</span>
+    <span>SELECCIONA UNA PLANTILLA QUE VISUALIZAR</span>
     <ng-container *ngIf="numberOfFrames > 0">
         Tengo frames
     </ng-container>
     <ng-container *ngIf="numberOfFrames == 0">
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-            <img fxFlex="50" src="../../assets/images/one_screen.png" class="cursor-pointer" alt="one frame" (click)="addFrames(1)">
-            <img fxFlex="50" src="../../assets/images/two_screens.png" class="cursor-pointer" alt="two frames" (click)="addFrames(2)">
+        <!-- Se deben enseñar de dos en dos y con scroll -->
+        <div *ngFor="let template of templates" fxLayout="row" fxLayoutGap="20px" class="my-3">
+            <div *ngFor="let object of template" fxLayout="column" >
+                <img fxFlex src="{{object.src}}"  alt="{{object.id}}" class="img-thumbnail" (click)="addFrames(object.id)">
+            </div>
         </div>
+        
     </ng-container>
 </div>

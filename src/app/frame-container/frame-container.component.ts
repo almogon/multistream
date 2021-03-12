@@ -1,7 +1,7 @@
 import { HostListener } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { FrameTwitch } from '../shared/models/frame-twitch';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-frame-container',
@@ -12,12 +12,14 @@ export class FrameContainerComponent implements OnInit {
 
   public frames: FrameTwitch[] = [];
   public numberOfFrames = 0;
+  public templates : any;
   private screenHeight: number | undefined;
   private screenWidth: number | undefined;
 
 
   constructor() { 
     this.onResize();
+    this.templates = environment.templates;
   }
 
   ngOnInit(): void {
