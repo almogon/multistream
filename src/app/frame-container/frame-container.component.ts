@@ -10,9 +10,11 @@ import { FrameTwitch } from '../shared/models/frame-twitch';
 })
 export class FrameContainerComponent implements OnInit {
 
-  private frames: Observable<FrameTwitch[]> | undefined;
+  public frames: FrameTwitch[] = [];
+  public numberOfFrames = 0;
   private screenHeight: number | undefined;
   private screenWidth: number | undefined;
+
 
   constructor() { 
     this.onResize();
@@ -22,8 +24,8 @@ export class FrameContainerComponent implements OnInit {
     console.log("frame twitch container displaying");
   }
 
-  createPossibleFrames() {
-
+  addFrames(numberOfFrames: number) {
+    this.numberOfFrames = numberOfFrames;
   }
 
   @HostListener('window:resize', ['$event'])

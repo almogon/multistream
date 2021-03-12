@@ -1,19 +1,12 @@
-<div> HOLA
-    <!--
-    <div fxLayout="row">
-      <app-frame-twitch
-        src="https://player.twitch.tv/?channel=snoodyboo&parent=localhost&muted=true"
-        height="360"
-        width="640"
-        allowfullscreen="false">
-      </app-frame-twitch>
-  
-      <app-frame-twitch
-        src="https://player.twitch.tv/?channel=snoodyboo&parent=localhost&muted=true"
-        height="360"
-        width="640"
-        allowfullscreen="false">
-      </app-frame-twitch>
-    </div>
-    -->
+<div fxFlex fxLayout="column" fxLayoutAlign="space-around center"> 
+    <span>SELECCIONA CUANTAS PANTALLAS QUIERES VER</span>
+    <ng-container *ngIf="numberOfFrames > 0">
+        Tengo frames
+    </ng-container>
+    <ng-container *ngIf="numberOfFrames == 0">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <img fxFlex="50" src="../../assets/images/one_screen.png" class="cursor-pointer" alt="one frame" (click)="addFrames(1)">
+            <img fxFlex="50" src="../../assets/images/two_screens.png" class="cursor-pointer" alt="two frames" (click)="addFrames(2)">
+        </div>
+    </ng-container>
 </div>
