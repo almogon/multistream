@@ -17,7 +17,6 @@ export class FrameTwitchComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log("frame twitch displaying");
   }
 
 }

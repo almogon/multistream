@@ -4,27 +4,31 @@
 
 export const environment = {
   production: false,
-  s3Url: "",
-  twitchLink: "https://player.twitch.tv/?",
+  s3Url: '',
+  twitchLink: 'https://player.twitch.tv/?',
   templates: [
-    [ 
+    [
       {
-        id: "oneS",
-        src: "../../assets/images/one_screen.png"
+        id: 'o-s',
+        src: '../../assets/images/one_screen.png',
+        url: 'main'
       },
       {
-        id: "twoS",
-        src: "../../assets/images/two_screens.png"
+        id: 't-s',
+        src: '../../assets/images/two_screens.png',
+        url: 'split'
       }
     ],
     [
       {
-        id: "fourS",
-        src: "../../assets/images/four_screens.png"
+        id: 'f-s',
+        src: '../../assets/images/four_screens.png',
+        url: 'multi'
       },
       {
-        id: "fourWithMain",
-        src: "../../assets/images/four_with_main.png"
+        id: 'f-s-m',
+        src: '../../assets/images/four_with_main.png',
+        url: 'multi-main'
       }
     ]
   ]
