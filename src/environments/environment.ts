@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   s3Url: '',
-  twitchLink: 'https://player.twitch.tv/?',
+  twitchLink: 'https://player.twitch.tv/?channel={{channel}}&parent=localhost&muted=true',
   templates: [
     [
       {
@@ -31,7 +31,9 @@ export const environment = {
         url: 'multi-main'
       }
     ]
-  ]
+  ],
+  twitchId: "hmmpxx824ypngoxd8ouqs6f98ltym4",
+  twitchSecret: "izhy9ko997p6fgy4fecjavfcr0x6k4"
 };
 
 /*
