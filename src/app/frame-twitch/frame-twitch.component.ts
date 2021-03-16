@@ -25,9 +25,9 @@ export class FrameTwitchComponent implements OnInit {
     });
   }
 
-  showVideo(): void {
+  showVideo(twitchEmbed: HTMLDivElement): void {
     const channel = this.frameFormControl.value.channel;
-    const embed = new Twitch.Embed( this.frame?.nativeElement, {
+    const embed = new Twitch.Embed( twitchEmbed, {
       channel,
       width: 854,
       height: 480,
@@ -42,11 +42,11 @@ export class FrameTwitchComponent implements OnInit {
   }
 
 
-  cleanChannel(): void {
+  cleanChannel(twitchEmbed: HTMLDivElement): void {
     this.frameFormControl.patchValue({
       channel: ''
     });
-    this.frame?.nativeElement.remove();
     this.videoIsReady = false;
+    twitchEmbed.innerHTML = '';
   }
 }
