@@ -1,6 +1,25 @@
-<iframe
-    src="../.."
-    height="height"
-    width="width"
-    allowfullscreen="allowFullScreen">
-</iframe>
+<form [formGroup]="frameFormControl" >
+  <mat-label></mat-label>
+
+  <mat-form-field class="form-field">
+    <mat-label>{{'channelName' | translate}}</mat-label>
+    <input matInput type="text" name="channel" formControlName="channel">
+  </mat-form-field>
+
+  <button mat-button *ngIf="frameFormControl.value.channel && !videoIsReady" matSuffix mat-icon-button aria-label="Clear" (click)="showVideo()">
+    <mat-icon>check_circle</mat-icon>
+  </button>
+  <button mat-button *ngIf="frameFormControl.value.channel" matSuffix mat-icon-button aria-label="Clear" (click)="cleanChannel()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <div>
+    <div *ngIf="!videoIsReady">Aqui iria un rectangulo donde luego ira el video</div>
+    <div #twitchEmbed></div>
+  </div>
+
+</form>
+
+
+
+

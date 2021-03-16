@@ -1,0 +1,9 @@
+<div fxFlex fxLayout="column" fxLayoutAlign="space-around center">
+  <span>{{'welcome' | translate | uppercase}}</span>
+  <!-- Se deben enseñar de dos en dos y con scroll -->
+  <div *ngFor="let template of templates" fxLayout="row" fxLayoutGap="20px" class="my-3">
+    <div *ngFor="let object of template" fxLayout="column">
+      <img fxFlex src="{{object.src}}"  alt="{{object.id}}" class="img-thumbnail" (click)="navigateTo(object.url)">
+    </div>
+  </div>
+</div>
