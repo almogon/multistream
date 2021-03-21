@@ -6,7 +6,7 @@
     <input matInput type="text" name="channel" formControlName="channel">
   </mat-form-field>
 
-  <button mat-button *ngIf="frameFormControl.value.channel && !videoIsReady" matSuffix mat-icon-button aria-label="Clear" (click)="videoIsReady = !videoIsReady; showVideo(twitchEmbed)">
+  <button mat-button *ngIf="frameFormControl.value.channel && !videoIsReady" matSuffix mat-icon-button aria-label="Clear" (click)="showVideo(twitchEmbed)">
     <mat-icon>check_circle</mat-icon>
   </button>
   <button mat-button *ngIf="frameFormControl.value.channel" matSuffix mat-icon-button aria-label="Clear" (click)="cleanChannel(twitchEmbed)">
@@ -14,7 +14,7 @@
   </button>
 
   <div>
-    <div *ngIf="!videoIsReady"> Video not ready</div>
+    <mat-spinner *ngIf="loading"></mat-spinner>
     <div #twitchEmbed></div>
   </div>
 

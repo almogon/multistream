@@ -1,6 +1,4 @@
-<div *ngIf="twitchLink" class="f-height d-flex align-items-center">
-  <app-frame-twitch></app-frame-twitch>
-</div>
-<div *ngIf="!twitchLink">
-  No link
-</div>
+<app-frame-twitch class="f-height d-flex align-items-center"
+  [width]="854"]
+  [height]="480"
+></app-frame-twitch>

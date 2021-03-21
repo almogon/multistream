@@ -1,5 +1,6 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
+import {CommonsService} from '../shared/services/commons.service';
 declare const Twitch: any;
 
 @Component({
@@ -12,25 +13,28 @@ export class FrameTwitchComponent implements OnInit {
     channel: new FormControl()
   });
   videoIsReady = false;
+  loading = false;
+  twitchLink: string | undefined;
+
+  @Input() width: number | undefined;
+  @Input() height: number | undefined;
 
   @ViewChild('twitchEmbed') frame: ElementRef | undefined;
 
-  constructor() { }
+  constructor(private commons: CommonsService) { }
 
   ngOnInit(): void {
-    this.frameFormControl.controls.channel.valueChanges.subscribe(value => {
-      if (value !== '') {
-
-      }
-    });
   }
 
   showVideo(twitchEmbed: HTMLDivElement): void {
+    this.loading = true;
     const channel = this.frameFormControl.value.channel;
+    this.twitchLink = this.commons.getLinkTwitchChannel(channel).toString();
+    console.log(this.twitchLink);
     const embed = new Twitch.Embed( twitchEmbed, {
       channel,
-      width: 854,
-      height: 480,
+      width: this.width || 854, // 854
+      height: this.height || 480, // 480
       muted: true,
       allowfullscreen: true,
       autoplay: true,
@@ -38,15 +42,17 @@ export class FrameTwitchComponent implements OnInit {
     });
     embed.addEventListener(Twitch.Player.READY, () => {
       this.videoIsReady = true;
+      this.loading = false;
     });
   }
-
 
   cleanChannel(twitchEmbed: HTMLDivElement): void {
     this.frameFormControl.patchValue({
       channel: ''
     });
     this.videoIsReady = false;
+    this.loading = false;
     twitchEmbed.innerHTML = '';
+    this.twitchLink = undefined;
   }
 }
