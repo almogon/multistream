@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {CommonsService} from '../shared/services/commons.service';
 declare const Twitch: any;
@@ -18,6 +18,7 @@ export class FrameTwitchComponent implements OnInit {
 
   @Input() width: number | undefined;
   @Input() height: number | undefined;
+  @Output() channelLoaded = new EventEmitter<void>();
 
   @ViewChild('twitchEmbed') frame: ElementRef | undefined;
 
@@ -43,6 +44,7 @@ export class FrameTwitchComponent implements OnInit {
     embed.addEventListener(Twitch.Player.READY, () => {
       this.videoIsReady = true;
       this.loading = false;
+      this.channelLoaded.emit();
     });
   }
 

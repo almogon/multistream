@@ -21,11 +21,6 @@ export const environment = {
     ],
     [
       {
-        id: 'f-s',
-        src: '../../assets/images/four_screens.png',
-        url: 'multi'
-      },
-      {
         id: 'f-s-m',
         src: '../../assets/images/four_with_main.png',
         url: 'multi-main'
