@@ -9,7 +9,6 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class MainComponent implements OnInit {
 
-
   // @ts-ignore
   frameObserver: BehaviorSubject<FrameType[]> = new BehaviorSubject([]);
   parFramesList: any[] = [];
@@ -22,7 +21,6 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.frameObserver.subscribe(frames => {
-      // TODO create pair list that HTML can draw
       let auxList: any[] = [];
       this.parFramesList = [];
       frames.forEach((value, index) => {
