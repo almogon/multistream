@@ -31,3 +31,10 @@
   min-height: 500px;
 }
 
+.pair-element {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+

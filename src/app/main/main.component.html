@@ -3,24 +3,26 @@
   <mat-label>Add new channel</mat-label>
 </div>
 
-<div *ngFor="let frame of parFramesList;let indexList = index" class="d-flex flex-column" fxLayoutGap="50px">
-  <div id="pairList" class="d-flex flex-row justify-content-between" fxLayoutGap="50px">
-    <div *ngFor="let type of frame;let indexPar = index" class="d-flex justify-content-center">
+<div #columns class="d-flex flex-column" fxLayoutGap="50px">
+  <!-- Add here pairElement containers -->
 
-      <app-frame-twitch *ngIf="isTwitch(type)" class="f-height d-flex align-items-start"
-                        [width]="854"
-                        [height]="480"
-                        (channelLoaded)="channelLoaded()"
-                        (removeChannel)="removeChannel((2*indexList)+indexPar)"
-      ></app-frame-twitch>
 
-      <div *ngIf="isBox(type)" class="box box-s d-flex align-self-center" fxLayoutGap="5px" (click)="addOtherFrame()">
-        <mat-icon>add_to_queue</mat-icon>
-        <mat-label>Add new channel</mat-label>
-      </div>
-
-      <div *ngIf="isEmpty(type)" class="box-s d-flex">EMTPY</div>
-    </div>
-  </div>
 
 </div>
+
+<template #pairElement class="d-flex flex-row" fxLayoutGap="50px">
+</template>
+<template #twitch>
+  <app-frame-twitch class="f-height d-flex align-items-start"
+                    [width]="854"
+                    [height]="480"
+                    (channelLoaded)="channelLoaded()"
+                    (removeChannel)="removeChannel()"
+  ></app-frame-twitch>
+</template>
+<template #box>
+  <div class="box box-s align-self-center" fxLayoutGap="5px" (click)="addOtherFrame()">
+    <mat-icon>add_to_queue</mat-icon>
+    <mat-label>Add new channel</mat-label>
+  </div>
+</template>
