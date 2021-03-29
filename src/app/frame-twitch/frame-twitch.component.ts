@@ -18,8 +18,8 @@ export class FrameTwitchComponent implements OnInit {
 
   @Input() width: number | undefined;
   @Input() height: number | undefined;
-  @Output() channelLoaded = new EventEmitter<void>();
-  @Output() removeChannel = new EventEmitter<void>();
+  @Output() channelLoadedEvent = new EventEmitter<void>();
+  @Output() removeChannelEvent = new EventEmitter<void>();
 
   @ViewChild('twitchEmbed') frame: ElementRef | undefined;
 
@@ -44,7 +44,7 @@ export class FrameTwitchComponent implements OnInit {
     embed.addEventListener(Twitch.Player.READY, () => {
       this.videoIsReady = true;
       this.loading = false;
-      this.channelLoaded.emit();
+      this.channelLoadedEvent.emit();
     });
   }
 
@@ -56,6 +56,9 @@ export class FrameTwitchComponent implements OnInit {
     this.loading = false;
     twitchEmbed.innerHTML = '';
     this.twitchLink = undefined;
-    this.removeChannel.emit();
+  }
+
+  removeChannel(): void {
+    this.removeChannelEvent.emit();
   }
 }

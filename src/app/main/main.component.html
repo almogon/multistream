@@ -3,26 +3,22 @@
   <mat-label>Add new channel</mat-label>
 </div>
 
-<div #columns class="d-flex flex-column" fxLayoutGap="50px">
-  <!-- Add here pairElement containers -->
-
-
-
-</div>
-
-<template #pairElement class="d-flex flex-row" fxLayoutGap="50px">
-</template>
-<template #twitch>
-  <app-frame-twitch class="f-height d-flex align-items-start"
-                    [width]="854"
-                    [height]="480"
-                    (channelLoaded)="channelLoaded()"
-                    (removeChannel)="removeChannel()"
-  ></app-frame-twitch>
-</template>
-<template #box>
-  <div class="box box-s align-self-center" fxLayoutGap="5px" (click)="addOtherFrame()">
+<div class="d-flex" fxLayoutGap="50px">
+  <div #columns class="d-flex justify-content-between">
+    <!-- Add here frames -->
+  </div>
+  <div *ngIf="!firstIteration" id="add-box" class="box box-s align-self-center" fxLayoutGap="5px" (click)="addOtherFrame()">
     <mat-icon>add_to_queue</mat-icon>
     <mat-label>Add new channel</mat-label>
   </div>
-</template>
+</div>
+
+<ng-template #twitch>
+    <app-frame-twitch class="f-height d-flex align-items-start"
+        [width]="854"
+        [height]="480"
+        (channelLoadedEvent)="channelLoaded()"
+        (removeChannelEvent)="removeChannel()"
+    ></app-frame-twitch>
+</ng-template>
+

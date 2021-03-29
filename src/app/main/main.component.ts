@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component,  OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
 
 @Component({
   selector: 'app-main',
@@ -8,12 +8,10 @@ import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core
 export class MainComponent implements OnInit {
   firstIteration = true;
 
-  @ViewChild('columns') columns: ElementRef | undefined;
-  @ViewChild('pairElement') pairElement: ElementRef | undefined;
-  @ViewChild('twitch') twitch: ElementRef | undefined;
-  @ViewChild('box') box: ElementRef | undefined;
+  @ViewChild('columns', { read: ViewContainerRef }) columns: ViewContainerRef | undefined;
+  @ViewChild('twitch') twitch: TemplateRef<any> | undefined;
 
-  constructor(private renderer: Renderer2) {
+  constructor() {
     this.firstIteration = true;
   }
 
@@ -22,28 +20,19 @@ export class MainComponent implements OnInit {
 
   addFirstElement(): void {
     this.firstIteration = false;
-    const pairElementAux: ElementRef | undefined = this.pairElement;
-    const twitchBox = this.twitch?.nativeElement;
-    this.renderer.addClass(twitchBox, 'd-flex');
-    this.renderer.appendChild(pairElementAux?.nativeElement, twitchBox);
-
-    const addMoreBox = this.box?.nativeElement;
-    this.renderer.addClass(addMoreBox, 'd-flex');
-    this.renderer.appendChild(pairElementAux?.nativeElement, addMoreBox);
-
-    this.renderer.appendChild(this.columns?.nativeElement, pairElementAux?.nativeElement);
+    this.addOtherFrame();
   }
 
   channelLoaded(): void {
-
   }
 
   addOtherFrame(): void {
+    if (this.twitch) {
+      this.columns?.createEmbeddedView(this.twitch);
+    }
   }
 
   removeChannel(): void {
 
   }
-
-
 }

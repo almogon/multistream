@@ -5,28 +5,7 @@
 export const environment = {
   production: false,
   s3Url: '',
-  twitchLink: 'https://player.twitch.tv/?channel={{channel}}',
-  templates: [
-    [
-      {
-        id: 'o-s',
-        src: '../../assets/images/one_screen.png',
-        url: 'main'
-      },
-      {
-        id: 't-s',
-        src: '../../assets/images/two_screens.png',
-        url: 'split'
-      }
-    ],
-    [
-      {
-        id: 'f-s-m',
-        src: '../../assets/images/four_with_main.png',
-        url: 'multi-main'
-      }
-    ]
-  ]
+  twitchLink: 'https://player.twitch.tv/?channel={{channel}}'
 };
 
 /*
