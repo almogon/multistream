@@ -7,6 +7,7 @@ import {Component,  OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@ang
 })
 export class MainComponent implements OnInit {
   firstIteration = true;
+  showAddMore = false;
 
   @ViewChild('columns', { read: ViewContainerRef }) columns: ViewContainerRef | undefined;
   @ViewChild('twitch') twitch: TemplateRef<any> | undefined;
@@ -24,15 +25,21 @@ export class MainComponent implements OnInit {
   }
 
   channelLoaded(): void {
+    this.showAddMore = true;
   }
 
   addOtherFrame(): void {
     if (this.twitch) {
+      this.showAddMore = false;
       this.columns?.createEmbeddedView(this.twitch);
     }
   }
 
-  removeChannel(): void {
+  removeChannel(element: any): void {
+      console.log(element);
+  }
 
+  getShowBox(): boolean {
+    return this.showAddMore;
   }
 }

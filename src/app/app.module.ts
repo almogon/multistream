@@ -10,7 +10,6 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from './material.module';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MainComponent} from './main/main.component';
 
 @NgModule({
@@ -34,8 +33,7 @@ import {MainComponent} from './main/main.component';
         FormsModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
-        MaterialModule,
-        MatProgressSpinnerModule
+        MaterialModule
     ],
   providers: [
   ],

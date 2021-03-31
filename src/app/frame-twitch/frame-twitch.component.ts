@@ -20,6 +20,7 @@ export class FrameTwitchComponent implements OnInit {
   @Input() height: number | undefined;
   @Output() channelLoadedEvent = new EventEmitter<void>();
   @Output() removeChannelEvent = new EventEmitter<void>();
+  @Output() cleanChannelEvent = new EventEmitter<void>();
 
   @ViewChild('twitchEmbed') frame: ElementRef | undefined;
 
@@ -56,6 +57,7 @@ export class FrameTwitchComponent implements OnInit {
     this.loading = false;
     twitchEmbed.innerHTML = '';
     this.twitchLink = undefined;
+    this.cleanChannelEvent.emit();
   }
 
   removeChannel(): void {

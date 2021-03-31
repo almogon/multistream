@@ -7,18 +7,20 @@
   <div #columns class="d-flex justify-content-between">
     <!-- Add here frames -->
   </div>
-  <div *ngIf="!firstIteration" id="add-box" class="box box-s align-self-center" fxLayoutGap="5px" (click)="addOtherFrame()">
+  <div *ngIf="!firstIteration && getShowBox()" id="add-box" class="box box-s align-self-center" fxLayoutGap="5px"
+       (click)="addOtherFrame()">
     <mat-icon>add_to_queue</mat-icon>
     <mat-label>Add new channel</mat-label>
   </div>
 </div>
 
 <ng-template #twitch>
-    <app-frame-twitch class="f-height d-flex align-items-start"
+    <app-frame-twitch class="f-height d-flex align-items-start" id="form_twitch"
         [width]="854"
         [height]="480"
         (channelLoadedEvent)="channelLoaded()"
-        (removeChannelEvent)="removeChannel()"
+        (removeChannelEvent)="removeChannel(twitch)"
+        (cleanChannelEvent)="showAddMore = false"
     ></app-frame-twitch>
 </ng-template>
 
