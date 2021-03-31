@@ -1,26 +1,32 @@
-<div *ngIf="firstIteration" class="box box-g d-flex align-items-center justify-content-center" fxLayoutGap="5px" (click)="addFirstElement()">
-  <mat-icon>add_to_queue</mat-icon>
-  <mat-label>Add new channel</mat-label>
-</div>
-
-<div class="d-flex" fxLayoutGap="50px">
-  <div #columns class="d-flex justify-content-between">
-    <!-- Add here frames -->
-  </div>
-  <div *ngIf="!firstIteration && getShowBox()" id="add-box" class="box box-s align-self-center" fxLayoutGap="5px"
-       (click)="addOtherFrame()">
+<div class="main-container">
+  <div *ngIf="firstIteration" class="box box-g d-flex align-self-center justify-content-center" fxLayoutGap="5px" (click)="addFirstElement()">
     <mat-icon>add_to_queue</mat-icon>
     <mat-label>Add new channel</mat-label>
   </div>
+
+  <div fxLayoutGap="50px">
+    <div #columns fxLayoutAlign="space-around center" >
+      <!-- Add here frames -->
+    </div>
+    <div *ngIf="!firstIteration && getShowBox()" id="add-box" class="box box-s align-self-center" fxLayoutGap="5px"
+         (click)="addOtherFrame()">
+      <mat-icon>add_to_queue</mat-icon>
+      <mat-label>Add new channel</mat-label>
+    </div>
+  </div>
+
+  <ng-template #twitch>
+    <div #frame id="frame">
+      <app-frame-twitch class="f-height align-items-start" fxFlex
+                        [width]="854"
+                        [height]="480"
+                        [id]="idFrame"
+                        (channelLoadedEvent)="channelLoaded()"
+                        (removeChannelEvent)="removeChannel(frame)"
+                        (cleanChannelEvent)="showAddMore = false"
+      ></app-frame-twitch>
+    </div>
+  </ng-template>
 </div>
 
-<ng-template #twitch>
-    <app-frame-twitch class="f-height d-flex align-items-start" id="form_twitch"
-        [width]="854"
-        [height]="480"
-        (channelLoadedEvent)="channelLoaded()"
-        (removeChannelEvent)="removeChannel(twitch)"
-        (cleanChannelEvent)="showAddMore = false"
-    ></app-frame-twitch>
-</ng-template>
 

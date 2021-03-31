@@ -17,8 +17,8 @@
 }
 
 .box-g {
-  min-width: 854px;
-  min-height: 480px;
+  width: 854px;
+  height: 480px;
 }
 
 .box-s {
@@ -35,6 +35,11 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.main-container {
+  max-width: 100vw;
+  min-width: 90vw;
 }
 
 

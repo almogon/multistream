@@ -10,7 +10,8 @@ declare const Twitch: any;
 })
 export class FrameTwitchComponent implements OnInit {
   frameFormControl = new FormGroup({
-    channel: new FormControl()
+    channel: new FormControl(),
+    id: new FormControl()
   });
   videoIsReady = false;
   loading = false;
@@ -18,6 +19,7 @@ export class FrameTwitchComponent implements OnInit {
 
   @Input() width: number | undefined;
   @Input() height: number | undefined;
+  @Input() id: number | undefined;
   @Output() channelLoadedEvent = new EventEmitter<void>();
   @Output() removeChannelEvent = new EventEmitter<void>();
   @Output() cleanChannelEvent = new EventEmitter<void>();
@@ -27,6 +29,11 @@ export class FrameTwitchComponent implements OnInit {
   constructor(private commons: CommonsService) { }
 
   ngOnInit(): void {
+    if (this.id && !this.frameFormControl.value.id) {
+      this.frameFormControl.patchValue({
+        id: this.id
+      });
+    }
   }
 
   showVideo(twitchEmbed: HTMLDivElement): void {
@@ -38,7 +45,6 @@ export class FrameTwitchComponent implements OnInit {
       width: this.width || 854, // 854
       height: this.height || 480, // 480
       muted: true,
-      allowfullscreen: true,
       autoplay: true,
       layout: 'video'
     });

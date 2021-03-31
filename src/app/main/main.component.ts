@@ -1,4 +1,5 @@
 import {Component,  OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
+import {FrameTwitchComponent} from '../frame-twitch/frame-twitch.component';
 
 @Component({
   selector: 'app-main',
@@ -8,6 +9,7 @@ import {Component,  OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@ang
 export class MainComponent implements OnInit {
   firstIteration = true;
   showAddMore = false;
+  idFrame = 0;
 
   @ViewChild('columns', { read: ViewContainerRef }) columns: ViewContainerRef | undefined;
   @ViewChild('twitch') twitch: TemplateRef<any> | undefined;
@@ -32,11 +34,17 @@ export class MainComponent implements OnInit {
     if (this.twitch) {
       this.showAddMore = false;
       this.columns?.createEmbeddedView(this.twitch);
+      this.idFrame++;
     }
   }
 
-  removeChannel(element: any): void {
-      console.log(element);
+  removeChannel(element: HTMLDivElement): void {
+      // element.hidden = true;
+      element.parentElement?.removeChild(element);
+      const allFrames = document.getElementById('frame');
+      if (!allFrames) {
+        this.firstIteration = true;
+      }
   }
 
   getShowBox(): boolean {
