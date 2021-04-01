@@ -22,8 +22,8 @@
 }
 
 .box-s {
-  width: 337px;
-  height: 238px;
+  width: 250px;
+  height: 45px;
 }
 
 .box-channel {
@@ -40,6 +40,14 @@
 .main-container {
   max-width: 100vw;
   min-width: 90vw;
+  height: 100vh;
+  margin-bottom: 100px;
+}
+
+.container-box {
+  display: inline-block;
+  justify-content: center;
+  height: 480px;
 }
 
 

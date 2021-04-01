@@ -46,8 +46,4 @@ export class MainComponent implements OnInit {
         this.firstIteration = true;
       }
   }
-
-  getShowBox(): boolean {
-    return this.showAddMore;
-  }
 }
