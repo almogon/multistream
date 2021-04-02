@@ -1,0 +1,32 @@
+<form [formGroup]="frameFormControl" >
+  <div class="d-flex flex-row" fxLayoutGap="50px">
+    <mat-form-field class="form-field">
+      <mat-label>{{'channelName' | translate}}</mat-label>
+      <input matInput type="text" name="channel" formControlName="channel">
+      <button mat-button *ngIf="frameFormControl.value.channel && !videoIsReady && !loading" matSuffix mat-icon-button aria-label="Clear" (click)="showVideo(twitchEmbed)">
+        <mat-icon>check_circle</mat-icon>
+      </button>
+      <button mat-button *ngIf="frameFormControl.value.channel && !loading" matSuffix mat-icon-button aria-label="Clear" (click)="cleanChannel(twitchEmbed)">
+        <mat-icon>close</mat-icon>
+      </button>
+
+    </mat-form-field>
+    <button mat-button color="warn" (click)="removeChannel()">{{ 'remove' | translate}}</button>
+
+    <mat-progress-spinner *ngIf="loading" class="ml-2 align-self-center"
+                          mode="indeterminate"
+                          value="70"
+                          diameter="20">
+    </mat-progress-spinner>
+  </div>
+
+
+  <div>
+    <div #twitchEmbed></div>
+  </div>
+
+</form>
+
+
+
+

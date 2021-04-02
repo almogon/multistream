@@ -1,0 +1,33 @@
+<div class="main-container justify-content-center">
+  <div *ngIf="firstIteration" class="box box-g align-self-center" fxLayoutGap="5px" (click)="addFirstElement()">
+    <mat-icon>add_to_queue</mat-icon>
+    <mat-label>{{ 'addChannel' | translate}}</mat-label>
+  </div>
+
+  <div #columns class="d-flex justify-content-around align-items-center">
+    <!-- Add here frames -->
+  </div>
+
+  <div class="container-box m-2">
+    <div *ngIf="!firstIteration && showAddMore" id="add-box" class="box box-s align-self-center ml-2" fxLayoutGap="5px"
+         (click)="addOtherFrame()">
+      <mat-icon>add_to_queue</mat-icon>
+      <mat-label>{{'addChannel' | translate}}</mat-label>
+    </div>
+  </div>
+
+  <ng-template #twitch>
+    <div #frame id="frame" class="m-2 d-flex float-left">
+      <app-frame-twitch class="d-flex f-height align-items-start"
+                        [width]="750"
+                        [height]="480"
+                        [id]="idFrame"
+                        (channelLoadedEvent)="channelLoaded()"
+                        (removeChannelEvent)="removeChannel(frame)"
+                        (cleanChannelEvent)="showAddMore = false"
+      ></app-frame-twitch>
+    </div>
+  </ng-template>
+</div>
+
+
