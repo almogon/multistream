@@ -10,6 +10,7 @@ export class CommonsService {
 
   getLinkTwitchChannel(channelName: string): string {
     const twitchLink = environment.twitchLink;
-    return twitchLink.replace('{{channel}}', channelName);
+    const location = window.location.hostname;
+    return twitchLink.replace('{{channel}}', channelName) + '&parent=' + location;
   }
 }

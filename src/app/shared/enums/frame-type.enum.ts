@@ -1,4 +1,6 @@
 export enum FrameType {
+    EMPTY,
     TWITCH,
-    YOUTUBE
+    YOUTUBE,
+    BOX
 }

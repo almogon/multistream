@@ -1,5 +1,6 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
+import {CommonsService} from '../shared/services/commons.service';
 declare const Twitch: any;
 
 @Component({
@@ -9,44 +10,63 @@ declare const Twitch: any;
 })
 export class FrameTwitchComponent implements OnInit {
   frameFormControl = new FormGroup({
-    channel: new FormControl()
+    channel: new FormControl(),
+    id: new FormControl()
   });
   videoIsReady = false;
+  loading = false;
+  twitchLink: string | undefined;
+
+  @Input() width: number | undefined;
+  @Input() height: number | undefined;
+  @Input() id: number | undefined;
+  @Output() channelLoadedEvent = new EventEmitter<void>();
+  @Output() removeChannelEvent = new EventEmitter<void>();
+  @Output() cleanChannelEvent = new EventEmitter<void>();
 
   @ViewChild('twitchEmbed') frame: ElementRef | undefined;
 
-  constructor() { }
+  constructor(private commons: CommonsService) { }
 
   ngOnInit(): void {
-    this.frameFormControl.controls.channel.valueChanges.subscribe(value => {
-      if (value !== '') {
-
-      }
-    });
+    if (this.id && !this.frameFormControl.value.id) {
+      this.frameFormControl.patchValue({
+        id: this.id
+      });
+    }
   }
 
-  showVideo(): void {
+  showVideo(twitchEmbed: HTMLDivElement): void {
+    this.loading = true;
     const channel = this.frameFormControl.value.channel;
-    const embed = new Twitch.Embed( this.frame?.nativeElement, {
+    this.twitchLink = this.commons.getLinkTwitchChannel(channel).toString();
+    const embed = new Twitch.Embed( twitchEmbed, {
       channel,
-      width: 854,
-      height: 480,
+      width: this.width || 854, // 854
+      height: this.height || 480, // 480
       muted: true,
-      allowfullscreen: true,
       autoplay: true,
       layout: 'video'
     });
     embed.addEventListener(Twitch.Player.READY, () => {
       this.videoIsReady = true;
+      this.loading = false;
+      this.channelLoadedEvent.emit();
     });
   }
 
-
-  cleanChannel(): void {
+  cleanChannel(twitchEmbed: HTMLDivElement): void {
     this.frameFormControl.patchValue({
       channel: ''
     });
-    this.frame?.nativeElement.remove();
     this.videoIsReady = false;
+    this.loading = false;
+    twitchEmbed.innerHTML = '';
+    this.twitchLink = undefined;
+    this.cleanChannelEvent.emit();
+  }
+
+  removeChannel(): void {
+    this.removeChannelEvent.emit();
   }
 }
